@@ -1,6 +1,10 @@
 class Api::V1::MenuItemsController < ApplicationController
   def index
-    items = MenuItem.all
+    if params[:category]
+      items = MenuItem.where category: params[:category]
+    else
+      items = MenuItem.all
+    end
     render json: { menu_items: items }
   end
 end

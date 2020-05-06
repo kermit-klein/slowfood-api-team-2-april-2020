@@ -5,11 +5,13 @@ RSpec.describe MenuItem, type: :model do
     it { is_expected.to have_db_column :name }
     it { is_expected.to have_db_column :description }
     it { is_expected.to have_db_column :price }
+    it { is_expected.to have_db_column :category}
   end
 
   describe 'Validation' do
     it { is_expected.to validate_presence_of :name }
     it { is_expected.to validate_presence_of :price }
+    it { is_expected.to validate_presence_of :category }
   end
 
   describe 'Factory' do

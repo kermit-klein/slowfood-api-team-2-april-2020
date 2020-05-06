@@ -3,5 +3,6 @@ FactoryBot.define do
     name { "MyString" }
     description { "MyText" }
     price { 69.0 }
+    category { "starter" }
   end
 end
