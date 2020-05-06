@@ -1,3 +1,3 @@
 class MenuItem < ApplicationRecord
-	validates_presence_of :name, :price
+	validates_presence_of :name, :price, :category
 end
