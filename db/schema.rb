@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2020_05_06_161640) do
     t.float "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "category"
+    t.integer "category"
   end
 
   create_table "users", force: :cascade do |t|
