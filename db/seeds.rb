@@ -5,3 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+food1 = MenuItem.create(name: 'Pickled Egg', description: 'An egg that is a reeeeal pickle!', price: 69)
+food2 = MenuItem.create(name: 'Bread', description: 'Simply bread', price: 25)
+food3 = MenuItem.create(name: 'Ham Sandwich', description: 'No, not hamBURGER, ham SANDWICH', price: 42)
