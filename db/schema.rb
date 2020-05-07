@@ -34,8 +34,10 @@ ActiveRecord::Schema.define(version: 2020_05_07_095934) do
   end
 
   create_table "orders", force: :cascade do |t|
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -67,4 +69,5 @@ ActiveRecord::Schema.define(version: 2020_05_07_095934) do
 
   add_foreign_key "order_items", "menu_items"
   add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "users"
 end
