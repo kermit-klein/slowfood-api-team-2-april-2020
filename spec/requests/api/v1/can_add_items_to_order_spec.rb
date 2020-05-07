@@ -14,29 +14,15 @@ RSpec.describe Api::V1::OrdersController, type: :request do
     end
 
     it 'has a success message' do
-      expect(response.message).to eq "Item added to order"
+      expect(response_json["message"]).to eq "Item added to order"
     end
 
     it 'returns the opened order id' do
-      expect(response).to have_key('id')
-    end
-  end
-
-  describe 'PUT /api/v1/order/:id, =further items' do
-    before do
-      
+      expect(response_json).to have_key('id')
     end
 
-    it 'responds with a 200 status' do
-      skip("TODO")
+    it 'has the first item in it' do
+      expect(Order.last.order_items[0]["menu_item_id"]).to eq food1.id
     end
-
-    it 'responds with a success message' do
-      skip("TODO")
-    end
-  end
-
-  describe 'GET /api/v1/order/:id, fetch the order in its current status' do
-
   end
 end
