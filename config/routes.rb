@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     end
     namespace :v1 do
       resources :menu_items, only: [:index], constraints: { format: 'json' }
-      resources :orders, only: [:create], constraints: { format: 'json' }
+      resources :orders, only: %i[create update], constraints: { format: 'json' }
     end
   end
 end
