@@ -9,7 +9,7 @@ RSpec.describe Api::V1::OrdersController, type: :request do
 
   before do
     post '/api/v1/orders', params: { menu_item: food1.id }
-    @order_id = response_json['id']
+    @order_id = response_json['order']['id']
   end
 
   describe 'POST /api/v1/order, without user' do
@@ -27,6 +27,10 @@ RSpec.describe Api::V1::OrdersController, type: :request do
 
     it 'has the first item in it' do
       expect(Order.last.order_items[0]['menu_item_id']).to eq food1.id
+    end
+
+    it 'responds with right order total' do
+      expect(response_json['order']['total']).to eq 69
     end
   end
 
@@ -48,6 +52,10 @@ RSpec.describe Api::V1::OrdersController, type: :request do
 
     it 'add another product to order' do
       expect(@order.order_items.count).to eq 2
+    end
+
+    it 'responds with right amount of unique products' do
+      expect(response_json['order']['menu_item'].count).to eq 2
     end
 
     it 'has a success message' do
