@@ -65,5 +65,9 @@ RSpec.describe Api::V1::OrdersController, type: :request do
     it 'returns the opened order id' do
       expect(response_json['order']['id']).to eq Order.last.id
     end
+
+    it 'responds with right order total' do
+      expect(response_json['order']['total']).to eq 138
+    end
   end
 end
