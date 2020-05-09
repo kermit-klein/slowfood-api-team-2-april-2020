@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class OrderSerializer < ActiveModel::Serializer
-  attributes :id, :menu_item, :total, :order_total
+  attributes :id, :menu_items, :total, :order_total
 
   def menu_items
     object.order_items.group_by(&:menu_item_id).map do |_key, value|

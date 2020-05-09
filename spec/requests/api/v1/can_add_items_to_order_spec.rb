@@ -22,7 +22,7 @@ RSpec.describe Api::V1::OrdersController, type: :request do
     end
 
     it 'returns the opened order id' do
-      expect(response_json).to have_key('id')
+      expect(response_json['order']['id']).to eq Order.last.id
     end
 
     it 'has the first item in it' do
@@ -55,7 +55,7 @@ RSpec.describe Api::V1::OrdersController, type: :request do
     end
 
     it 'responds with right amount of unique products' do
-      expect(response_json['order']['menu_item'].count).to eq 2
+      expect(response_json['order']['menu_items'].count).to eq 2
     end
 
     it 'has a success message' do
@@ -63,7 +63,7 @@ RSpec.describe Api::V1::OrdersController, type: :request do
     end
 
     it 'returns the opened order id' do
-      expect(response_json).to have_key('id')
+      expect(response_json['order']['id']).to eq Order.last.id
     end
   end
 end
