@@ -8,11 +8,10 @@ RSpec.describe Api::V1::OrdersController, type: :request do
   before do
     order.order_items.create(menu_item: food1)
     order.order_items.create(menu_item: food2)
-
-    put "/api/orders/#{order.id}", params: { activity: 'finalize' }
+    put "/api/v1/orders/#{order.id}", params: { activity: 'finalize' }
   end
 
-  describe 'PUT /api/orders' do
+  describe 'PUT /api/v1/orders' do
     it 'responds with success message' do
       expect(JSON.parse(response.body)['message']).to eq 'Your order will be ready in 30 minutes!'
     end

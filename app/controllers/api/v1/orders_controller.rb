@@ -9,9 +9,14 @@ class Api::V1::OrdersController < ApplicationController
 
   def update
     order = Order.find(params[:id])
-    menu_item = MenuItem.find(params[:menu_item])
-    order.order_items.create(menu_item: menu_item)
-    render json: create_json_response(order)
+    if params[:activity]
+      order.update_attribute(:finalized, true)
+      render json: { message: 'Your order will be ready in 30 minutes!' }
+    else
+      menu_item = MenuItem.find(params[:menu_item])
+      order.order_items.create(menu_item: menu_item)
+      render json: create_json_response(order)
+    end
   end
 
   private
