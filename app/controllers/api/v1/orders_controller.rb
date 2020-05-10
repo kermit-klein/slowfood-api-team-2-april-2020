@@ -9,11 +9,17 @@ class Api::V1::OrdersController < ApplicationController
 
   def update
     order = Order.find(params[:id])
-    if params[:activity] && !order.user.nil?
-      order.update_attribute(:finalized, true)
-      render json: { message: 'Your order will be ready in 30 minutes!' }
-    elsif params[:activity] && order.user.nil?
-      render json: { message: 'You need to be logged in' }
+    case params[:activity]
+    when "finalize"
+      if !order.user.nil?
+        order.update_attribute(:finalized, true)
+        render json: { message: 'Your order will be ready in 30 minutes!' }
+      else 
+        render json: { message: 'You need to be logged in' }
+      end
+    when "login"
+      order.update_attribute(:user_id, params[:user])
+      render json: { message: 'User added to order' }
     else
       menu_item = MenuItem.find(params[:menu_item])
       order.order_items.create(menu_item: menu_item)
