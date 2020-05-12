@@ -2,22 +2,23 @@
 
 class Api::V1::OrdersController < ApplicationController
   def create
-    order = Order.create(user_id: params[:user])
+    user = User.find_by(email: params[:user])
+    order = Order.create(user: user)
     order.order_items.create(menu_item_id: params[:menu_item])
     render json: create_json_response(order)
   end
 
   def update
-    order = Order.find(params[:id])
+    order = Order.find(params[:id]) # Update action needs to get email params from frontend just like create action
     case params[:activity]
-    when "finalize"
+    when 'finalize'
       if !order.user.nil?
         order.update_attribute(:finalized, true)
         render json: { message: 'Your order will be ready in 30 minutes!' }
-      else 
+      else
         render json: { message: 'You need to be logged in' }
       end
-    when "login"
+    when 'login'
       order.update_attribute(:user_id, params[:user])
       render json: { message: 'User added to order' }
     else

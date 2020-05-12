@@ -36,7 +36,7 @@ RSpec.describe Api::V1::OrdersController, type: :request do
 
   describe 'POST /api/v1/order, with user' do
     before do
-      post '/api/v1/orders', params: { menu_item: food1.id, user: user.id }
+      post '/api/v1/orders', params: { menu_item: food1.id, user: user.email }
     end
 
     it ' belongs to user' do
